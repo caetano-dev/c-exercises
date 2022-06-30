@@ -14,22 +14,22 @@ c) custo do combustível por quilometro rodado em toda a viagem */
 int main(){
     float kilometros, paradas, reabastecimentos, litros ,kilometrosTotal=0;
     float precoGasolina, precoGasolinaTotal = 0;
-    printf("Digite o numero de vezes reabastecidas: \n");
+    printf("Digite o numero de vezes reabastecidas: ");
     scanf("%f", &reabastecimentos);
 
     for (int i = 1; i<=reabastecimentos; i++){
-        printf("Digite o preço da gasolina: \n");
+        printf("Digite o preço da gasolina: ");
         scanf("%f", &precoGasolina);
         precoGasolinaTotal += precoGasolina;
 
-        printf("Digite a quantidade de litros: \n");
+        printf("Digite a quantidade de litros: ");
         scanf("%f", &litros);
 
-        printf("Digite o numero de km rodados: \n");
+        printf("Digite o numero de km rodados: ");
         scanf("%f", &kilometros);
         kilometrosTotal += kilometros;
-        printf("kilometragem é: %f\n", kilometros/litros);
+        printf("kilometragem é: %f", kilometros/litros);
 
 }
-printf("o custo do combustível por quilometro rodado em toda a viagem é %f\n", kilometrosTotal/precoGasolinaTotal);
+printf("o custo do combustível por quilometro rodado em toda a viagem é %f", kilometrosTotal/precoGasolinaTotal);
 }
