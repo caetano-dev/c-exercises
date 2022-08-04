@@ -27,7 +27,14 @@ int main()
     }
     for (int i = 0; i < numeroElementos; i++)
     {
-        printf("%.1f\n", vetor[i]);
+        if (vetor[i] == (int)(vetor[i]))
+        {
+            printf("%.1d\t", (int)vetor[i]);
+        }
+        else
+        {
+            printf("%.1f\t", vetor[i]);
+        }
     }
 
     free(vetor);
