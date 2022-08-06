@@ -3,32 +3,40 @@
 
 int main()
 {
-    int numeroElementos, *ptr = 0;
-    ptr = (int *)malloc(numeroElementos * sizeof(float));
+    float *vetor = NULL;
+    float temp;
+    int numeroElementos = 0;
+    vetor = malloc(numeroElementos * sizeof(*vetor));
     scanf("%d", &numeroElementos);
-    float elementos[numeroElementos], temp;
 
     for (int i = 0; i < numeroElementos; i++)
     {
-        scanf("%f", &elementos[i]);
+        scanf("%f", &vetor[i]);
     }
     for (int i = 0; i <= numeroElementos - 1; i++)
     {
         for (int c = 0; c <= numeroElementos - 2 - i; c++)
         {
-            if (elementos[c] < elementos[c + 1])
+            if (vetor[c] < vetor[c + 1])
             {
-                temp = elementos[c];
-                elementos[c] = elementos[c + 1];
-                elementos[c + 1] = temp;
+                temp = vetor[c];
+                vetor[c] = vetor[c + 1];
+                vetor[c + 1] = temp;
             }
         }
     }
     for (int i = 0; i < numeroElementos; i++)
     {
-        printf("%.1f\n", elementos[i]);
+        if (vetor[i] == (int)(vetor[i]))
+        {
+            printf("%.1d\t", (int)vetor[i]);
+        }
+        else
+        {
+            printf("%.1f\t", vetor[i]);
+        }
     }
 
-    free(ptr);
+    free(vetor);
     return 0;
 }
