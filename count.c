@@ -1,17 +1,30 @@
-#include <string.h>
 #include <stdio.h>
 #define MAX_LIMIT 1024
 
 int main () {
-   char string[MAX_LIMIT];
-   fgets(string, MAX_LIMIT, stdin);
-   int count = 0;
-   const char s[2] = " ";
-   char *token;
-   token = strtok(string, s);
-   while( token != NULL ) {
-      count++;
-      token = strtok(NULL, s);
+   enum estado{ dentroDaPalavra = 0, foraDaPalavra = 1};
+   char caractere;
+   int i, estado, numeroDeCaracteres = 0;
+   int count = 1;
+
+   while((caractere = getchar()) != '\n' && numeroDeCaracteres <= MAX_LIMIT){
+      numeroDeCaracteres++;
+      switch(caractere){
+         case '.':
+         case ';':
+         case ':':
+         case ',':
+         case ' ':
+            if (estado != foraDaPalavra){
+               estado = foraDaPalavra;}
+            break;
+         default:
+            if (estado != dentroDaPalavra){
+               estado = dentroDaPalavra;
+               count++;
+            }
+            break;
+      }
    }
    printf("%d", count);
    return(0);
