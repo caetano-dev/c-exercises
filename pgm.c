@@ -7,7 +7,7 @@ int main (){
     char hex[5];
 
     struct image{
-        char magicNumber[10];
+        char magicNumber[4];
         char description[100];
         int max;
         int columns;
@@ -21,8 +21,8 @@ int main (){
         perror("Erro: arquivo inexistente\n");
         exit(1);
     }
-    
-    fgets(image.magicNumber, 10, filePointer);
+
+    fgets(image.magicNumber, 4, filePointer);
     fgets(image.description, 100, filePointer);
 
     if(fscanf(filePointer,"%d %d",&image.columns, &image.lines)!=2){
@@ -56,8 +56,15 @@ int main (){
     printf("%d\n", image.max);
     for (int i = 0; i < image.lines; i++){
         for (int j = 0; j < image.columns; j++, bitmap++){
-            sprintf(hex,"%3X", *bitmap);
-            printf("%s", hex);
+            if(j==0){
+                sprintf(hex,"%X", *bitmap);
+                printf("%s", hex);
+            }
+            else{
+                sprintf(hex,"%3X", *bitmap);
+
+                printf("%s", hex);
+            }
         }
         printf("\n");
     }
