@@ -54,7 +54,7 @@ int main (){
     for (int i = 0; i < image.lines; i++){
         for (int j = 0; j < image.columns; j++, bitmap++){
             if(j==image.lines){
-                sprintf(hex,"%3X ", *bitmap);
+                sprintf(hex,"%3X", *bitmap);
                 printf("%s", hex);
             }
             else{
