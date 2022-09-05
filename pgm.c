@@ -2,21 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+FILE *filePointer;
+char hex[5];
+
+struct image{
+    char magicNumber[4];
+    char description[100];
+    int max;
+    int columns;
+    int lines;
+} image;
+
 int main (){
-    FILE *filePointer;
-    char hex[5];
-
-    struct image{
-        char magicNumber[4];
-        char description[100];
-        int max;
-        int columns;
-        int lines;
-    } image;
-
-    
-    //add all the checks.
-
     if (!(filePointer = fopen("img1.pgm", "rt"))){
         perror("Erro: arquivo inexistente\n");
         exit(1);
@@ -62,11 +59,9 @@ int main (){
             }
             else{
                 sprintf(hex,"%3X", *bitmap);
-
                 printf("%s", hex);
             }
         }
         printf("\n");
     }
-
 }
