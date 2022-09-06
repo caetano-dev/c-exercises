@@ -1,0 +1,14 @@
+1
+1 some text
+1
+1 this is some text
+1
+today is cool
+1
+
+while((character=getc(filePointer))!=EOF){
+    if(character == '\n')
+        numberOfLines = numberOfLines + 1;
+    character = getc(filePointer);
+    printf("%s is a char\n", &character);
+}
