@@ -30,33 +30,35 @@ int main(){
 
     fp = fopen("Funcionarios.txt", "r");
     if (fp == NULL)
-    {
         printf("Error!");   
-    }
-    /*fscanf(fptr, "%s", &funcionario1.nome[50]);*/
 
-    read = getline(&line, &len, fp);
-    printf("%s", line); //PAULO EUSTAQUIO DUARTE PINTO    201210320811 Rua do Catete 231 apto 1002, Catete, CEP 20123-100     01129257869 001 01246 032123-7 120.00
-    pegarNome(&funcionario1, line);
-    pegarMatricula(&funcionario1, line);
-    pegarEndereco(&funcionario1, line);
-    pegarCPF(&funcionario1, line);
-    pegarCodigoBanco(&funcionario1, line);
-    pegarAgencia(&funcionario1, line);
-    pegarConta(&funcionario1, line);
+    for (int i=0; i<=3; i++){ 
 
-    printf("%s\n", funcionario1.nome);
-    printf("%s\n", funcionario1.matricula);
-    printf("%s\n", funcionario1.endereco);
-    printf("%s\n", funcionario1.cpf);
-    printf("%s\n", funcionario1.cod_banco);
-    printf("%s\n", funcionario1.agencia);
-    printf("%s\n", funcionario1.conta);
+        read = getline(&line, &len, fp);
+        printf("%s", line); //PAULO EUSTAQUIO DUARTE PINTO    201210320811 Rua do Catete 231 apto 1002, Catete, CEP 20123-100     01129257869 001 01246 032123-7 120.00
 
+
+        pegarNome(&funcionario1, line);
+        pegarMatricula(&funcionario1, line);
+        pegarEndereco(&funcionario1, line);
+        pegarCPF(&funcionario1, line);
+        pegarCodigoBanco(&funcionario1, line);
+        pegarAgencia(&funcionario1, line);
+        pegarConta(&funcionario1, line);
+
+        printf("%s\n", funcionario1.nome);
+        printf("%s\n", funcionario1.matricula);
+        printf("%s\n", funcionario1.endereco);
+        printf("%s\n", funcionario1.cpf);
+        printf("%s\n", funcionario1.cod_banco);
+        printf("%s\n", funcionario1.agencia);
+        printf("%s\n", funcionario1.conta);
+        printf("\n");
+    };
     fclose(fp);
-
     return 0;
 }
+
 void pegarNome(struct funcionario *funcionario, char *line){
     for (int i=0; i<=50; i++){ 
         funcionario->nome[i] = line[i];
