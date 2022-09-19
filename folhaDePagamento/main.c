@@ -2,8 +2,8 @@
 #include <string.h>
 
 struct funcionario{
-    char nome[50];
-    char matricula[12];
+    char nome[52];
+    char matricula[14];
     char endereco[65];
     char cpf[11];
     char cod_banco[3];
@@ -12,8 +12,8 @@ struct funcionario{
     int valor_hora;
 };
 
-void pegarNome(struct funcionario *funcionario, char *line)
-void pegarMatricula(struct funcionario *funcionario, char *line)
+void pegarNome(struct funcionario *funcionario, char *line);
+void pegarMatricula(struct funcionario *funcionario, char *line);
 
 int main(){
     FILE *fp;
@@ -46,10 +46,12 @@ void pegarNome(struct funcionario *funcionario, char *line){
     for (int i=0; i<=50; i++){ 
         funcionario->nome[i] = line[i];
     };
+    funcionario->nome[51] = '\0';
 };
 
 void pegarMatricula(struct funcionario *funcionario, char *line){
     for (int i=50; i<=62; i++){ 
-        funcionario->matricula[i-start] = line[i];
+        funcionario->matricula[i-50] = line[i+1];
     };
+    funcionario->matricula[13] = '\0';
 };
