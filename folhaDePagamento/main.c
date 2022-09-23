@@ -19,6 +19,8 @@ void pegarCPF(struct funcionario *funcionario, char *line);
 void pegarCodigoBanco(struct funcionario *funcionario, char *line);
 void pegarAgencia(struct funcionario *funcionario, char *line);
 void pegarConta(struct funcionario *funcionario, char *line);
+void pegarCampos(struct funcionario *funcionario, char *line);
+void imprimirTabela(struct funcionario *funcionario);
 
 int main(){
     FILE *fp;
@@ -27,34 +29,51 @@ int main(){
     size_t len = 0;
     ssize_t read;
     struct funcionario funcionario1;
+    struct funcionario funcionario2;
+    struct funcionario funcionario3;
+    struct funcionario funcionario4;
+    struct funcionario funcionario5;
+    struct funcionario funcionario6;
+    struct funcionario funcionario7;
+    struct funcionario funcionario8;
+    struct funcionario funcionario9;
+    struct funcionario funcionario10;
 
     fp = fopen("Funcionarios.txt", "r");
     if (fp == NULL)
         printf("Error!");   
 
-    for (int i=0; i<=3; i++){ 
+        getline(&line, &len, fp);
+        pegarCampos(&funcionario1, line);
+        getline(&line, &len, fp);
+        pegarCampos(&funcionario2, line);
+        getline(&line, &len, fp);
+        pegarCampos(&funcionario3, line);
+        getline(&line, &len, fp);
+        pegarCampos(&funcionario4, line);
+        getline(&line, &len, fp);
+        pegarCampos(&funcionario5, line);
+        getline(&line, &len, fp);
+        pegarCampos(&funcionario6, line);
+        getline(&line, &len, fp);
+        pegarCampos(&funcionario7, line);
+        getline(&line, &len, fp);
+        pegarCampos(&funcionario8, line);
+        getline(&line, &len, fp);
+        pegarCampos(&funcionario9, line);
+        getline(&line, &len, fp);
+        pegarCampos(&funcionario10, line);
 
-        read = getline(&line, &len, fp);
-        printf("%s", line); //PAULO EUSTAQUIO DUARTE PINTO    201210320811 Rua do Catete 231 apto 1002, Catete, CEP 20123-100     01129257869 001 01246 032123-7 120.00
+        imprimirTabela(&funcionario2);
+        imprimirTabela(&funcionario3);
+        imprimirTabela(&funcionario4);
+        imprimirTabela(&funcionario5);
+        imprimirTabela(&funcionario6);
+        imprimirTabela(&funcionario7);
+        imprimirTabela(&funcionario8);
+        imprimirTabela(&funcionario9);
+        imprimirTabela(&funcionario10);
 
-
-        pegarNome(&funcionario1, line);
-        pegarMatricula(&funcionario1, line);
-        pegarEndereco(&funcionario1, line);
-        pegarCPF(&funcionario1, line);
-        pegarCodigoBanco(&funcionario1, line);
-        pegarAgencia(&funcionario1, line);
-        pegarConta(&funcionario1, line);
-
-        printf("%s\n", funcionario1.nome);
-        printf("%s\n", funcionario1.matricula);
-        printf("%s\n", funcionario1.endereco);
-        printf("%s\n", funcionario1.cpf);
-        printf("%s\n", funcionario1.cod_banco);
-        printf("%s\n", funcionario1.agencia);
-        printf("%s\n", funcionario1.conta);
-        printf("\n");
-    };
     fclose(fp);
     return 0;
 }
@@ -101,3 +120,32 @@ void pegarConta(struct funcionario *funcionario, char *line){
     };
     funcionario->conta[9] = '\0';
 };
+/*void pegarValorHora(struct funcionario *funcionario, char *line){*/
+    /*for (int i=153; i<=159; i++){ */
+        /*funcionario->conta[i-153] = line[i+7];*/
+    /*};*/
+    /*funcionario->valor_hora[7] = '\0';*/
+/*};*/
+
+void pegarCampos(struct funcionario *funcionario, char *line){
+    pegarNome(funcionario, line);
+    pegarMatricula(funcionario, line);
+    pegarEndereco(funcionario, line);
+    pegarCPF(funcionario, line);
+    pegarCodigoBanco(funcionario, line);
+    pegarAgencia(funcionario, line);
+    pegarConta(funcionario, line);
+    /*pegarValorHora(&funcionario[i], line);*/
+}
+void imprimirTabela(struct funcionario *funcionario){
+    printf("%s", funcionario->nome);
+    printf("|%s", funcionario->matricula);
+    printf("|%s", funcionario->endereco);
+    printf("|%s", funcionario->cpf);
+    printf("|%s", funcionario->cod_banco);
+    printf("|%s", funcionario->agencia);
+    printf("|%s", funcionario->conta);
+    printf("|%d", funcionario->valor_hora);
+    printf("\n");
+}
+
