@@ -4,7 +4,6 @@
 
 struct funcionario pegarValores(FILE *funcionariosPtr);
 struct valores pegarPagamento(FILE *valoresPtr);
-
 struct funcionario {
     char nome[51];
     char matricula[13];
@@ -15,14 +14,11 @@ struct funcionario {
     char conta[9];
     float valorHora;
 };
-
 struct valores {
     char matricula[13];
     int horasTrabalhadas;
 };
-
 void imprimir(struct funcionario arrayFuncionarios[10]);
-
 int main() {
     FILE *funcionariosPtr;
     FILE *valoresPtr;
@@ -57,7 +53,6 @@ int main() {
     return 0;
 }
 struct funcionario pegarValores(FILE *funcionariosPtr) {
-
     struct funcionario funcionarios;
     for(int i = 0; i < 50; i++) {
         funcionarios.nome[i] = getc(funcionariosPtr);
@@ -66,24 +61,17 @@ struct funcionario pegarValores(FILE *funcionariosPtr) {
     getc(funcionariosPtr);
     for(int i = 0; i < 12; i++)
         funcionarios.matricula[i] = getc(funcionariosPtr);
-
     funcionarios.matricula[12] = '\0';
     getc(funcionariosPtr);
-
     for(int i = 0; i < 65; i++)
         funcionarios.endereco[i] = getc(funcionariosPtr);
-
     getc(funcionariosPtr);
-
     for(int i = 0; i < 11; i++)
         funcionarios.cpf[i] = getc(funcionariosPtr);
-
     funcionarios.cpf[11] = '\0';
     getc(funcionariosPtr);
-
     for(int i = 0; i < 3; i++)
         funcionarios.codigoBancario[i] = getc(funcionariosPtr);
-
     funcionarios.codigoBancario[3] = '\0';
     getc(funcionariosPtr);
     fgets(funcionarios.agencia, 6, funcionariosPtr);
@@ -92,24 +80,19 @@ struct funcionario pegarValores(FILE *funcionariosPtr) {
     getc(funcionariosPtr);
     fscanf(funcionariosPtr, "%f", &funcionarios.valorHora);
     getc(funcionariosPtr);
-
     return funcionarios;
 }
 
 struct valores pegarPagamento(FILE *valoresPtr) {
-
     struct valores valores;
     for(int i = 0; i < 12; i++)
         valores.matricula[i] = getc(valoresPtr);
-
     valores.matricula[12] = '\0';
     getc(valoresPtr);
     int pagamentoPorHora;
-
     fscanf(valoresPtr, "%d", &pagamentoPorHora);
     valores.horasTrabalhadas = pagamentoPorHora;
     getc(valoresPtr);
-
     return valores;
 }
 
