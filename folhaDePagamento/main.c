@@ -21,26 +21,19 @@ struct valores {
     int horasTrabalhadas;
 };
 
+void imprimir(struct funcionario arrayFuncionarios[10]);
+
 int main() {
     FILE *funcionariosPtr;
-    if(!(funcionariosPtr = fopen("Funcionarios.txt","r")))
-        printf("o arquivo não existente");
-    
-
     FILE *valoresPtr;
-    if(!(valoresPtr = fopen("Novembro.txt","r")))
-        printf("o arquivo não existente");
-    
-
+    if(!(funcionariosPtr = fopen("Funcionarios.txt","r")) || !(valoresPtr = fopen("Novembro.txt","r")))
+        printf("o arquivo não existe!");
     struct funcionario arrayFuncionarios[10];
     struct valores valores[10];
-
     for (int i = 0; i < 10; i++) {
         arrayFuncionarios[i] = pegarValores(funcionariosPtr);
         valores[i] = pegarPagamento(valoresPtr);
     }
-
-
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
             if (strcmp(arrayFuncionarios[j].nome, arrayFuncionarios[j+1].nome) > 0) {
@@ -51,7 +44,6 @@ int main() {
             }
         }
     }
-
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
             if (strcmp(arrayFuncionarios[j].matricula, valores[i].matricula) == 0)
@@ -59,48 +51,47 @@ int main() {
 
         }
     }
-
-    for (int i = 0; i < 10; i++)
-        printf("%s|%s|%s|%.5s|%s|%.2f\n", arrayFuncionarios[i].nome, arrayFuncionarios[i].cpf, arrayFuncionarios[i].codigoBancario, arrayFuncionarios[i].agencia, arrayFuncionarios[i].conta, arrayFuncionarios[i].valorHora);
-
-
+    imprimir(arrayFuncionarios);
     fclose(funcionariosPtr);
     fclose(valoresPtr);
     return 0;
 }
-struct funcionario pegarValores(FILE *funcionariosPrt) {
+struct funcionario pegarValores(FILE *funcionariosPtr) {
 
     struct funcionario funcionarios;
     for(int i = 0; i < 50; i++) {
-        funcionarios.nome[i] = getc(funcionariosPrt);
+        funcionarios.nome[i] = getc(funcionariosPtr);
     }
-    getc(funcionariosPrt);
-    for(int i = 0; i < 12; i++) 
-        funcionarios.matricula[i] = getc(funcionariosPrt);
+    funcionarios.nome[50] = '\0';
+    getc(funcionariosPtr);
+    for(int i = 0; i < 12; i++)
+        funcionarios.matricula[i] = getc(funcionariosPtr);
 
-    getc(funcionariosPrt);
+    funcionarios.matricula[12] = '\0';
+    getc(funcionariosPtr);
 
     for(int i = 0; i < 65; i++)
-        funcionarios.endereco[i] = getc(funcionariosPrt);
-    
-    getc(funcionariosPrt);
+        funcionarios.endereco[i] = getc(funcionariosPtr);
+
+    getc(funcionariosPtr);
 
     for(int i = 0; i < 11; i++)
-        funcionarios.cpf[i] = getc(funcionariosPrt);
-    
-    getc(funcionariosPrt);
+        funcionarios.cpf[i] = getc(funcionariosPtr);
+
+    funcionarios.cpf[11] = '\0';
+    getc(funcionariosPtr);
 
     for(int i = 0; i < 3; i++)
-        funcionarios.codigoBancario[i] = getc(funcionariosPrt);
-    
+        funcionarios.codigoBancario[i] = getc(funcionariosPtr);
+
     funcionarios.codigoBancario[3] = '\0';
-    getc(funcionariosPrt);
-    fgets(funcionarios.agencia, 6, funcionariosPrt);
-    getc(funcionariosPrt);
-    fgets(funcionarios.conta, 9, funcionariosPrt);
-    getc(funcionariosPrt);
-    fscanf(funcionariosPrt, "%f", &funcionarios.valorHora);
-    getc(funcionariosPrt);
+    getc(funcionariosPtr);
+    fgets(funcionarios.agencia, 6, funcionariosPtr);
+    getc(funcionariosPtr);
+    fgets(funcionarios.conta, 9, funcionariosPtr);
+    getc(funcionariosPtr);
+    fscanf(funcionariosPtr, "%f", &funcionarios.valorHora);
+    getc(funcionariosPtr);
 
     return funcionarios;
 }
@@ -108,7 +99,7 @@ struct funcionario pegarValores(FILE *funcionariosPrt) {
 struct valores pegarPagamento(FILE *valoresPtr) {
 
     struct valores valores;
-    for(int i = 0; i < 12; i++) 
+    for(int i = 0; i < 12; i++)
         valores.matricula[i] = getc(valoresPtr);
 
     valores.matricula[12] = '\0';
@@ -122,3 +113,7 @@ struct valores pegarPagamento(FILE *valoresPtr) {
     return valores;
 }
 
+void imprimir(struct funcionario arrayFuncionarios[10]){
+    for (int i = 0; i < 10; i++)
+        printf("%s|%s|%s|%.5s|%s|%.2f\n", arrayFuncionarios[i].nome, arrayFuncionarios[i].cpf, arrayFuncionarios[i].codigoBancario, arrayFuncionarios[i].agencia, arrayFuncionarios[i].conta, arrayFuncionarios[i].valorHora);
+}
